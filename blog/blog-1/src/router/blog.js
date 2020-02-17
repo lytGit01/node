@@ -49,6 +49,7 @@ const handleBlogRouter = (req, res) => {
         // return new SuccessModel(data)
         const result = getDetail(id)
         return result.then(data => {
+            console.log(data)
             return new SuccessModel(data)
         })
     }

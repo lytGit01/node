@@ -13,7 +13,6 @@ const { SuccessModel, ErrorModel } = require('../model/resModel')
 router.get('/list', function(req, res, next) {
     let author = req.query.author || ''
     const keyword = req.query.keyword || ''
-
     // if (req.query.isadmin) {
     //     // 管理员界面
     //     const loginCheckResult = loginCheck(req)
@@ -27,16 +26,21 @@ router.get('/list', function(req, res, next) {
 
     const result = getList(author, keyword)
     return result.then(listData => {
+        console.log(listData)
         res.json(
             new SuccessModel(listData)
         )
     })
 });
 
+// 用id获取详情
 router.get('/detail', function(req, res, next) {
-    res.json({
-        erron: 0,
-        data: 'OK'
+    const id = req.query.id || '';
+    const result = getDetail(id);
+    return result.then(Detail => {
+        res.json(
+            new SuccessModel(Detail)
+        )
     })
 });
 
